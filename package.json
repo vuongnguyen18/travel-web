@@ -1,0 +1,29 @@
+{
+  "name": "web-server",
+  "version": "1.0.0",
+  "description": "Starter express web server template",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "start:dev": "nodemon ."
+  },
+  "keywords": [
+    "node",
+    "web",
+    "server",
+    "template",
+    "sit774"
+  ],
+  "author": "SIT774",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0",
+    "nodemailer": "^7.0.3",
+    "sqlite3": "^5.1.7",
+    "winston": "^3.17.0"
+  }
+}
