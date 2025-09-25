@@ -1,13 +1,24 @@
-const express = require('express');
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import authRouter, { authRequired } from './auth.js';
+import todosRouter from './routes.js';
+
 const app = express();
+app.use(cors());
 app.use(express.json());
 
-// serve your existing static travel site from /public (move your current assets there)
-app.use(express.static(__dirname + '/../public'));
+// health
+app.get('/health', (_req, res) => res.json({ ok: true }));
 
-const { authRoutes } = require('./auth');
-const { apiRoutes } = require('./routes');
-authRoutes(app);
-apiRoutes(app);
+// auth + protected todos
+app.use('/auth', authRouter);
+app.use('/todos', authRequired, todosRouter);
 
-module.exports = app;
+// serve static site from /web
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use('/', express.static(path.join(__dirname, '../../web')));
+
+export default app;
